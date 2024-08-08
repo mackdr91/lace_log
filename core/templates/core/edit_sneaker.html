@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Display messages if there are any -->
+{% if messages %}
+  <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
+    {% for message in messages %}
+      <span class="block">{{ message }}</span>
+    {% endfor %}
+  </div>
+{% endif %}
+<div class="m-6 flex space-x-4 items-center">
+  <a href="{% url 'core:home' %}" class="text-blue-600 hover:text-blue-800">Return to Home</a>
+  <a href="{% url 'inventory:inventory' %}" class="text-blue-600 hover:text-blue-800">Return to Inventory</a>
+</div>
+
+<!-- Form for adding or editing sneakers -->
+<form method="post" class="mt-6 space-y-4">
+    {% csrf_token %}
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <!-- Main form fields -->
+        <h2 class="text-xl font-semibold mb-4">Sneaker Details</h2>
+        {{ form.as_p }}
+
+        <!-- Formset management form -->
+        {{ formset.management_form }}
+
+        <!-- Formset fields -->
+        <h3 class="text-lg font-semibold mt-6 mb-4">Sizes and Quantities</h3>
+        {% for form in formset %}
+          <div class="bg-gray-100 p-4 rounded-lg shadow-sm mb-4">
+            {{ form.as_p }}
+          </div>
+        {% endfor %}
+
+        <!-- Submit button -->
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Save Changes</button>
+    </div>
+</form>
+
+<!-- Navigation links -->
+
+
+{% endblock %}

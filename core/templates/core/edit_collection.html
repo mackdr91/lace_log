@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-4">Edit Collection: {{ collection.name }}</h2>
+
+    <form method="post" class="bg-white p-6 rounded shadow-md">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <h3 class="text-xl font-semibold mt-6 mb-2">Sneakers Already in Collection</h3>
+        <ul class="list-disc pl-5 mb-4">
+            {% for sneaker in collection.sneaker.all %}
+                <li class="mb-2">
+                    <span class="font-medium">{{ sneaker.name }}</span> - {{ sneaker.brand }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h3 class="text-xl font-semibold mt-6 mb-2">Select Additional Sneakers</h3>
+        <ul class="list-disc pl-5 mb-4">
+            {% for sneaker in form.sneakers.field.queryset %}
+                {% if sneaker not in collection.sneaker.all %}
+                    <li class="mb-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" name="sneakers" value="{{ sneaker.pk }}" class="mr-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <span>{{ sneaker.name }} - {{ sneaker.brand }}</span>
+                        </label>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded">Save Changes</button>
+    </form>
+    <a href="{% url 'core:collection_detail' pk=collection.pk %}" class="inline-block mt-4 text-blue-600 hover:underline">Cancel</a>
+
+</div>
+
+{% endblock %}
+

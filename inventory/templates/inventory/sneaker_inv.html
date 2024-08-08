@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- Secondary Navbar -->
+<nav class="bg-gray-100 border-b border-gray-200 py-2">
+    <div class="container mx-auto flex justify-around items-center">
+      <a href="{% url 'inventory:download_qr_codes' %}" class="text-blue-600 hover:text-blue-800">Download All QR Codes</a>
+      <a href="{% url 'inventory:download_sneaker_spreadsheet' %}" class="text-blue-600 hover:text-blue-800">Download Sneaker Spreadsheet</a>
+      <a href="{% url 'inventory:add_sneaker' %}" class="text-blue-600 hover:text-blue-800">Add Sneaker</a>
+      <a href="{% url 'core:home' %}" class="text-blue-600 hover:text-blue-800">Home</a>
+    </div>
+  </nav>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200 bg-white">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Brand</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Release Date</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Is New</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purchase Date</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Color</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sizes & Quantities</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            {% for sneaker in sneakers %}
+            <tr>
+                <td class="px-6 py-4 whitespace-nowrap"><a href="{% url 'core:sneaker_detail' sneaker.id %}" class="text-blue-600 hover:text-blue-800">{{ sneaker.name }}</a></td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ sneaker.brand }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${{ sneaker.price }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ sneaker.release_date }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ sneaker.is_new }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ sneaker.purchase_date }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ sneaker.color }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ sneaker.location }}</td>
+                <td class="px-6 py-4 whitespace-nowrap truncate max-w-xs" title="{{ sneaker.description }}">{{ sneaker.description }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <ul class="list-disc pl-5">
+                        {% for variation in sneaker.variations.all %}
+                        <li>Size: {{ variation.size }}, Quantity: {{ variation.quantity }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <a href="{% url 'core:edit_sneaker' sneaker.id %}" class="text-blue-600 hover:text-blue-800">Edit</a> |
+                    <a href="{% url 'inventory:delete_sneaker' sneaker.id %}" class="text-red-600 hover:text-red-800">Remove</a> |
+                    <a href="{% static 'qr_codes/' %}{{ sneaker.id }}.png" target="_blank" class="text-green-600 hover:text-green-800">View QR Code</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

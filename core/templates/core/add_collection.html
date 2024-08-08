@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Loop through form fields and apply Tailwind styling -->
+        {% for field in form %}
+            <div>
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <p class="mt-2 text-sm text-gray-500">{{ field.help_text }}</p>
+                {% endif %}
+                {% if field.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ field.errors }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <!-- Submit button -->
+        <button type="submit" class="w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">
+            Add Collection
+        </button>
+    </form>
+</div>
+{% endblock %}

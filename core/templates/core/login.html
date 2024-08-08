@@ -1,0 +1,38 @@
+{% load static tailwind_tags %}
+{% tailwind_css %}
+
+<div class="flex flex-col justify-center items-center h-screen bg-gray-100">
+  <!-- Welcome Message -->
+  <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold mb-2">Welcome Back to Lace Log!</h1>
+      <p class="text-lg text-gray-600">Log in to manage your sneaker collection like never before.</p>
+  </div>
+
+  <!-- Login Form -->
+  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border border-gray-300 w-full max-w-md" method="POST">
+      {% csrf_token %}
+
+      <div class="mb-4">
+          <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+          <input type="text" id="username" placeholder="Enter Username" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      </div>
+
+      <div class="mb-6">
+          <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+          <input type="password" id="password" placeholder="Enter Password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      </div>
+
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
+
+      <!-- Additional Links -->
+      <div class="flex justify-between mt-4 text-sm text-gray-600">
+          <!-- Forgot Password Link <a href="#" class="hover:underline">Forgot Password?</a>-->
+          <a href="{% url 'core:register' %}" class="hover:underline">Create an Account</a>
+      </div>
+  </form>
+
+  <!-- Tagline or Footer -->
+  <div class="text-center mt-4 text-gray-500 text-sm">
+      <p>&copy; 2024 Lace Log. All rights reserved.</p>
+  </div>
+</div>

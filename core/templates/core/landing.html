@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaceLog</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-20">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold">Manage Your Sneaker Collection with Ease</h1>
+            <p class="mt-4 text-lg">Track, organize, and secure your sneakers with our powerful tools.</p>
+            <p class="mt-4 text-lg">Start your sneaker collection today!</p>
+
+            <a href="{% url 'core:register' %}"  class="inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-full mt-6">Get Started</a>
+
+            <p class="mt-6 text-lg">Already have an account? <a href="{% url 'core:login' %}" class="text-white font-semibold hover:underline ">Login</a></p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-10">Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h3 class="text-xl font-semibold">QR Code Generation</h3>
+                    <p class="mt-4">
+                        Generate unique QR codes for each sneaker in your collection.
+                        Share them with others and remember them for later. Finally remember
+                        what you have on hand during those sneaker conversations.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h3 class="text-xl font-semibold">Inventory Management</h3>
+                    <p class="mt-4">
+                        Keep track of your sneakers, including sizes and quantities.
+                        Create and manage custom collections of your favorite sneakers.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h3 class="text-xl font-semibold">Custom Collections</h3>
+                    <p class="mt-4">Create and manage custom collections of your favorite sneakers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+
+    <section class="bg-gray-200 py-20">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">See it in Action</h2>
+            <p class="mb-6">Check out our demo to see how it works.</p>
+            <div class="grid grid-cols-1 gap-8">
+                <img src="{% static 'images/screenshot1.png' %}" alt="Screenshot 1" class="w-full h-auto max-w-3xl mx-auto object-cover shadow-lg rounded-lg">
+                <img src="{% static 'images/screenshot2.png' %}" alt="Screenshot 2" class="w-full h-auto max-w-3xl mx-auto object-cover shadow-lg rounded-lg">
+                <img src="{% static 'images/screenshot3.png' %}" alt="Screenshot 3" class="w-full h-auto max-w-3xl mx-auto object-cover shadow-lg rounded-lg">
+                <img src="{% static 'images/screenshot4.png' %}" alt="Screenshot 4" class="w-full h-auto max-w-3xl mx-auto object-cover shadow-lg rounded-lg">
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="bg-blue-600 text-white py-20">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Start?</h2>
+            <p class="mb-6">
+                Start your sneaker collection today! From solo collectors to large-scale brands,
+                our sneaker management platform is designed to help you stay organized and on top of your sneaker collection.
+            </p>
+            <a href="{% url 'core:register' %}" class="inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-full">Get Started</a>
+        </div>
+    </section>
+
+    <section id="faqs" class="py-20">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold">How does LaceLog work?</h3>
+                <p>
+                    Lace Log is a sneaker management tool. It allows you to track, organize, and flaunt your collection with ease and style.
+                    Keep track of your sneakers, including sizes and quantities. Create and manage custom collections of your favorite sneakers.
+                    Generate unique QR codes for each sneaker in your collection so you can easily share them with others and remember them for later.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md mt-4">
+                <h3 class="text-xl font-semibold">What features are included?</h3>
+                <p>
+                    Lace Log includes the following features:
+                    <ul>
+                        <li>QR code generation</li>
+                        <li>Inventory management</li>
+                        <li>Custom collections</li>
+                        <li>Spreadsheet export</li>
+                    </ul>
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md mt-4">
+                <h3 class="text-xl font-semibold">What is your pricing policy?</h3>
+                <p>
+                    Our pricing policy is free for everyone. If you're interested in licensing your sneaker collection, please contact us.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md mt-4">
+                <h3 class="text-xl font-semibold">What if I have more questions?</h3>
+                <p>
+                    If you have any additional questions, please contact us. We're here to help!
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 LaceLog. All rights reserved.</p>
+            <div class="mt-4">
+                <a href="#" class="text-blue-400 hover:underline">Privacy Policy</a> |
+                <a href="#" class="text-blue-400 hover:underline">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto p-6 bg-white rounded-lg shadow-md mt-5">
+  <!-- Sneaker Details -->
+  <h1 class="text-2xl font-bold mb-4">{{ sneaker.name }} - {{ sneaker.brand }} - ${{ sneaker.price }}</h1>
+
+  <ul class="list-disc pl-5 space-y-2">
+    <li class="text-gray-700">{{ sneaker.description }}</li>
+    <li class="text-gray-600">Release Date: {{ sneaker.release_date }}</li>
+    <li class="text-gray-600">New: {% if sneaker.is_new %}Yes{% else %}No{% endif %}</li>
+    <li class="text-gray-600">Purchase Date: {{ sneaker.purchase_date }}</li>
+    <li class="text-gray-600">Color: {{ sneaker.color }}</li>
+    <li class="text-gray-600">Location: {{ sneaker.location }}</li>
+  </ul>
+
+  <h3 class="text-xl font-semibold mt-6 mb-2">Available Sizes and Quantities:</h3>
+  <ul class="list-disc pl-5 space-y-2">
+    {% for variation in sneaker.variations.all %}
+      <li class="text-gray-600">Size: {{ variation.size }}, Quantity: {{ variation.quantity }}</li>
+    {% endfor %}
+  </ul>
+
+  <!-- QR Code -->
+  <h3 class="text-xl font-semibold mt-6 mb-2">QR Code</h3>
+  <img src="{% static 'qr_codes/' %}{{ sneaker.id }}.png" alt="QR code for {{ sneaker.name }}" class="w-32 h-32 border border-gray-300 rounded-md">
+
+  <!-- Action Links -->
+  <div class="mt-6 flex space-x-4">
+    <a href="{% url 'core:edit_sneaker' sneaker.id %}" class="text-blue-600 hover:text-blue-800">Edit</a>
+    <a href="{% url 'inventory:delete_sneaker' sneaker.id %}" class="text-red-600 hover:text-red-800">Remove</a>
+    <a href="{% url 'core:home' %}" class="text-blue-600 hover:text-blue-800">Home</a>
+  </div>
+</div>
+
+{% endblock %}

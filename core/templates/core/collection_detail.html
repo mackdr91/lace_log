@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+
+
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Collection Details</h1>
+
+        <p class="text-lg mb-4">{{ collection.description }}</p>
+
+        <ul class="space-y-4">
+            {% for sneaker in collection.sneaker.all %}
+                <li class="bg-gray-100 p-4 rounded-lg shadow-sm">
+                    <div class="flex justify-between items-center mb-2">
+                       <a href="{% url 'core:sneaker_detail' pk=sneaker.pk %}">{{ sneaker.name }} - {{ sneaker.brand }} - ${{ sneaker.price }}</a>
+                        <div class="space-x-2">
+                            <a href="{% url 'core:remove_sneaker_from_collection' collection_pk=collection.pk sneaker_pk=sneaker.pk %}" class="text-red-600 hover:underline">Remove from Collection</a>
+                            <a href="{% url 'core:edit_sneaker' sneaker.id %}" class="text-blue-600 hover:underline">Edit</a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'core:delete_collection' pk=collection.pk %}" class="block mt-6 text-red-600 hover:underline">Delete Collection</a>
+    </div>
+</div>
+{% endblock %}

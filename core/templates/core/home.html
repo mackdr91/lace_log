@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="bg-blue-600 text-white py-4">
+  <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Welcome {{ user }}!</h1>
+      <a href="{% url 'inventory:inventory' %}" class="bg-blue-800 hover:bg-blue-700 text-white py-2 px-4 rounded">Inventory</a>
+  </div>
+</header>
+
+<main class="container mx-auto p-6">
+  <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">Your Sneakers</h2>
+      <ul class="space-y-4">
+          {% for s in page_obj %}
+              <li class="bg-white p-4 rounded shadow">
+                  <a href="{% url 'core:sneaker_detail' s.id %}" class="text-blue-600 hover:underline">{{ s.name }} - {{ s.brand }} - ${{ s.price }}</a>
+                  <div class="mt-2">
+                      <a href="{% url 'core:edit_sneaker' s.id %}" class="text-blue-600 hover:underline">Edit</a>
+                  </div>
+              </li>
+          {% endfor %}
+      </ul>
+      <div class="flex justify-between items-center mt-4">
+        <div class="flex space-x-2">
+          {% if page_obj.has_previous %}
+            <a href="?page=1" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-1 px-3 rounded">« First</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-1 px-3 rounded">Previous</a>
+          {% endif %}
+        </div>
+
+        <span class="text-gray-700">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        <div class="flex space-x-2">
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-1 px-3 rounded">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-1 px-3 rounded">Last »</a>
+          {% endif %}
+        </div>
+      </div>
+  </section>
+
+  <section>
+      <h2 class="text-xl font-semibold mb-4">Your Collections</h2>
+      <ul class="space-y-4">
+          {% for c in collection %}
+              <li class="bg-white p-4 rounded shadow">
+                  <a href="{% url 'core:collection_detail' c.id %}" class="text-blue-600 hover:underline">{{ c.description }}</a>
+                  <div class="mt-2">
+                      <a href="{% url 'core:edit-collection' c.id %}" class="text-blue-600 hover:underline">Edit</a>
+                  </div>
+              </li>
+          {% endfor %}
+      </ul>
+  </section>
+
+  <div class="mt-8 flex space-x-4">
+      <a href="{% url 'core:add_sneaker' %}" class="bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded">New Sneaker</a>
+      <a href="{% url 'core:add_collection' %}" class="bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded">New Collection</a>
+  </div>
+</main>
+
+{% endblock %}
